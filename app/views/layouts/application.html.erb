@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Core" %></title>
+    <title><%= content_for(:title) || "thesky___" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -10,19 +10,51 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <!-- Navigation Bar -->
+    <nav class="bg-[#FFFFF0] shadow-md fixed top-0 left-0 h-[100px] w-screen z-50">
+      <div class="relative h-full container mx-auto px-4 flex items-center justify-between">
+
+        <!-- Logo  -->
+        <div class="text-xl font-bold flex items-center">
+          <%= link_to root_path, class: "text-black hover:text-blue-600 flex items-center" do %>
+            sky___
+          <% end %>
+        </div>
+
+        <!--  Desktop Nav -->
+        <ul id="menu" class="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-6 text-lg font-medium">
+          <li><%= link_to "Home", root_path, class: "hover:bg-indigo-700 hover:text-white px-4 py-2 rounded-md transition" %></li>
+          <li><%= link_to "blogs", blogs_path, class: "hover:bg-indigo-700 hover:text-white px-4 py-2 rounded-md transition" %></li>
+        </ul>
+
+        <!-- Hamburger for mobile -->
+        <button id="menu-toggle" class="text-black md:hidden focus:outline-none text-3xl">
+          ☰
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-[120px] px-5 flex">
+      <%= yield %>
+    </main>
+
+    <script>
+      const menuToggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("menu");
+
+      menuToggle.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+      });
+    </script>
   </body>
 </html>
