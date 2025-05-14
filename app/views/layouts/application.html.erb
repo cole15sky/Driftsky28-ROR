@@ -19,46 +19,12 @@
   </head>
 
   <body>
-    <!-- Navigation Bar -->
-    <nav class="bg-[#FFFFF0] shadow-md fixed top-0 left-0 h-[100px] w-screen z-50">
-      <div class="relative h-full container mx-auto px-4 flex items-center justify-between">
-
-        <!-- Logo  -->
-        <div class="text-xl font-bold flex items-center gap-2">
-        <%= link_to root_path, class: "text-black hover:text-blue-600 flex items-center gap-3" do %>
-          <%= image_tag "himal.jpg", alt: "Logo", class: "h-12 w-12 rounded-full" %>
-          sky___
-        <% end %>
-      </div>
-      
-      
-      
-
-        <!--  Desktop Nav -->
-        <ul id="menu" class="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-6 text-lg font-medium">
-          <li><%= link_to "Home", root_path, class: "hover:bg-indigo-700 hover:text-white px-4 py-2 rounded-md transition" %></li>
-          <li><%= link_to "blogs", blogs_path, class: "hover:bg-indigo-700 hover:text-white px-4 py-2 rounded-md transition" %></li>
-        </ul>
-
-        <!-- Hamburger for mobile -->
-        <button id="menu-toggle" class="text-black md:hidden focus:outline-none text-3xl">
-          ☰
-        </button>
-      </div>
-    </nav>
+    <!-- Header -->
+    <%= render 'layouts/header' %>
 
     <!-- Main Content -->
     <main class="container mx-auto mt-[120px] px-5 flex">
       <%= yield %>
     </main>
-
-    <script>
-      const menuToggle = document.getElementById("menu-toggle");
-      const menu = document.getElementById("menu");
-
-      menuToggle.addEventListener("click", () => {
-        menu.classList.toggle("hidden");
-      });
-    </script>
   </body>
 </html>
