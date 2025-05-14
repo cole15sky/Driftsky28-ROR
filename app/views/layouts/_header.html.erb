@@ -1,0 +1,41 @@
+<!-- app/views/layouts/_header.html.erb -->
+<nav class="bg-[#FFFFF0] shadow-md fixed top-0 left-0 h-[100px] w-screen z-50">
+  <div class="relative h-full container mx-auto px-4 flex items-center justify-between">
+    <!-- Logo -->
+    <div class="text-xl font-bold flex items-center">
+      <%= link_to root_path, class: "text-black hover:text-blue-600 flex items-center" do %>
+        thesky___
+      <% end %>
+    </div>
+
+    <!--  Desktop Nav -->
+    <ul id="menu" class="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-6 text-lg font-medium">
+      <li><%= link_to "Home", root_path, class: "hover:bg-indigo-700 hover:text-white px-4 py-2 rounded-md transition" %></li>
+      <li><%= link_to "Blogs", blogs_path, class: "hover:bg-indigo-700 hover:text-white px-4 py-2 rounded-md transition" %></li>
+    </ul>
+
+    <!-- User Links -->
+    <div class="flex items-center space-x-4">
+      <% if current_user %>
+        <%= link_to "Sign Out", destroy_user_session_path, 'data-turbo-method': :delete, class: "hover:bg-red-600 hover:text-white px-4 py-2 rounded-md transition" %>
+      <% else %>
+        <%= link_to "Log In", new_user_session_path, class: "hover:bg-blue-600 hover:text-white px-4 py-2 rounded-md transition" %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "hover:bg-green-600 hover:text-white px-4 py-2 rounded-md transition" %>
+      <% end %>
+    </div>
+
+    <!-- Hamburger for mobile -->
+    <button id="menu-toggle" class="text-black md:hidden focus:outline-none text-3xl">
+      ☰
+    </button>
+  </div>
+</nav>
+
+<script>
+  const menuToggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("menu");
+
+  menuToggle.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+</script>
